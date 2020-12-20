@@ -1,3 +1,18 @@
+## Modified Version for Mac
+This is a version that I got to work on MacOS.  I really did change much, but here is what I did change:
+
+- `__main__.py`
+	- removed `get_magics` -- line 30
+	- removed the function `decryptsource` -- lines 265-277
+	- removed `decryptsource` function call -- line 417
+- `tools.py`
+	- removed `try except` block -- lines 10-14
+	- removed `get_magics` function -- lines 27-67
+
+So this is lacking the functions `get_magics` and `decryptsource`, however I got this to be able to import all of my passwords from Dashlane.
+
+# Original: [roddhjav](https://github.com/roddhjav)
+
 [<img src="https://gitlab.com/uploads/-/system/project/avatar/2296403/logo.png" align="right" height="110"/>][github-link]
 
 # pass import

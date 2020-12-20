@@ -7,12 +7,6 @@ import getpass
 import os
 import sys
 
-try:
-    import magic
-    MAGIC = True
-except ImportError:
-    MAGIC = False
-
 import yaml
 
 import pass_import.clean as clean
@@ -22,49 +16,6 @@ from pass_import.core import Cap
 def getpassword(path):
     """Get the master password."""
     return getpass.getpass("Password for %s: " % path)
-
-
-def get_magics(path):
-    """Get file format and encoding.
-
-    The magic library is not really good at detecting text file-based format
-    like CSV, JSON, YAML or, XML so we only use it to detect binary format and
-    the encoding.
-
-    Support both file-magic and python-magic as both are shipped under the same
-    name in various distributions.
-
-    """
-    if not MAGIC:
-        return None, None
-
-    with open(path, 'rb') as file:
-        header = file.read(2048)
-
-    if hasattr(magic, 'detect_from_content'):  # file-magic
-        res = magic.detect_from_content(header)
-        mime_type = res.mime_type
-        magic_name = res.name
-    else:  # python-magic
-        mime_type = magic.from_buffer(header, mime=True)
-        magic_name = magic.from_buffer(header)
-
-    mime_to_format = {
-        'application/pgp': 'gpg',
-        'application/x-sqlite3': 'sqlite3'
-    }
-    name_to_format = {'KDBX': 'kdbx', 'openssl': 'openssl', 'PGP': 'gpg'}
-
-    frmt = mime_to_format.get(mime_type, None)
-    for name in name_to_format:
-        if name in magic_name:
-            frmt = name_to_format[name]
-
-    encoding = None
-    if 'UTF-8 Unicode (with BOM)' in magic_name:
-        encoding = 'utf-8-sig'
-
-    return frmt, encoding
 
 
 class Config(dict):

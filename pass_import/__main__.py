@@ -27,7 +27,7 @@ from pass_import import Detecters, Managers, __version__
 from pass_import.auto import AutoDetect
 from pass_import.core import Cap
 from pass_import.errors import FormatError, PMError
-from pass_import.tools import Config, get_magics
+from pass_import.tools import Config
 
 MANAGERS = Managers()
 
@@ -262,21 +262,6 @@ def listmanagers(conf):
     sys.exit(0)
 
 
-def decryptsource(conf):
-    """Decrypt source file if required."""
-    path = conf['src'][1] if len(conf['src']) >= 2 else conf['src'][0]
-    if os.path.isfile(path):
-        decrypters = Detecters(Cap.DECRYPT)
-        frmt, encoding = get_magics(path)
-        if encoding:
-            conf['encoding'] = encoding
-        if frmt in decrypters:
-            with decrypters[frmt](path) as file:
-                conf['plaintext'] = file.decrypt()
-                conf['decrypted'] = True
-            conf.verbose("Source file decrypted using %s." % frmt)
-
-
 def detectmanager(conf):
     """Detect file format and password manager."""
     prefix = ''
@@ -414,7 +399,6 @@ def report(conf, paths):
 def main():
     """`pimport` and `pass import` common main."""
     conf = setup()
-    decryptsource(conf)
 
     # Password managers detection
     cls_import = detectmanager(conf)
