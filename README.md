@@ -1,7 +1,7 @@
 Modified Version for Mac
 ========================
 
-This is a version that I got to work on MacOS.  I really did change much, but here is what I did change:
+This is a version that I got to work on MacOS.  I really didn't change much, but here is what I did change:
 
 - `__main__.py`
 	- removed `get_magics` -- line 30
