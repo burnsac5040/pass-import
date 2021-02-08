@@ -1,5 +1,4 @@
-Modified Version for Mac
-========================
+# pass-import Modified Version for Mac
 
 This is a version that I got to work on MacOS.  I really didn't change much, but here is what I did change:
 
@@ -13,9 +12,8 @@ This is a version that I got to work on MacOS.  I really didn't change much, but
 
 So this is lacking the functions `get_magics` and `decryptsource`, however I got this to be able to import all of my passwords from Dashlane.
 
-Original: [roddhjav](https://github.com/roddhjav)
-==================
-
+# Original: [roddhjav](https://github.com/roddhjav)
+--------------------------------------------------------------------
 [<img src="https://gitlab.com/uploads/-/system/project/avatar/2296403/logo.png" align="right" height="110"/>][github-link]
 
 # pass import
